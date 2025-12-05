@@ -92,13 +92,12 @@ app.post("/auth/login", async (req, res, next) => {
   }
 });
 
-// Endpoint status (dari template)
+// Endpoint status 
 app.get("/status", (req, res) => {
   res.json({ status: "API Vendor A is running" });
 });
 
-// --- Endpoint CRUD untuk Vendor A (Mahasiswa 1) dengan Database ---
-// Catatan: Otentikasi diabaikan untuk endpoint ini sesuai spesifikasi legacy.
+// Endpoint CRUD untuk Vendor A (Mahasiswa 1) dengan Database 
 
 // 1. GET All Products (Vendor A)
 // Endpoint: GET /api/vendor-a/products
@@ -148,7 +147,6 @@ app.get("/api/vendor-a/products/:kd_produk", async (req, res, next) => {
 
 // 3. POST Create New Product (Vendor A)
 // Endpoint: POST /api/vendor-a/products
-// Body: { "kd_produk": "A004", "nm_brg": "...", "hrg": "...", "ket_stok": "..." }
 app.post(
   "/api/vendor-a/products",
   authenticateToken,
@@ -209,7 +207,6 @@ app.post(
 
 // 4. PUT Update Product by ID (Vendor A)
 // Endpoint: PUT /api/vendor-a/products/:kd_produk
-// Body: { "nm_brg": "...", "hrg": "...", "ket_stok": "..." } (kd_produk tidak bisa diubah)
 app.put(
   "/api/vendor-a/products/:kd_produk", 
   [authenticateToken, authorizeRole("admin")],   
@@ -309,23 +306,6 @@ app.delete(
     }
   }
 );
-// --- Akhir Endpoint CRUD Vendor A ---
-
-// --- Bagian Otentikasi & CRUD Lainnya (dari template) ---
-// app.post("/auth/register", async (req, res, next) => { ... });
-// app.post("/auth/register-admin", async (req, res, next) => { ... });
-// app.post("/auth/login", async (req, res, next) => { ... });
-// app.get("/movies", async (req, res, next) => { ... });
-// app.get("/movies/:id", async (req, res, next) => { ... });
-// app.post("/movies", authenticateToken, async (req, res, next) => { ... });
-// app.put("/movies/:id", [authenticateToken, authorizeRole("admin")], async (req, res, next) => { ... });
-// app.delete("/movies/:id", [authenticateToken, authorizeRole("admin")], async (req, res, next) => { ... });
-// app.get("/directors", async (req, res, next) => { ... });
-// app.get("/directors/:id", async (req, res, next) => { ... });
-// app.post("/directors", [authenticateToken], async (req, res, next) => { ... });
-// app.put("/directors/:id", [authenticateToken, authorizeRole("admin")], async (req, res, next) => { ... });
-// app.delete("/directors/:id", [authenticateToken, authorizeRole("admin")], async (req, res, next) => { ... });
-// --- Akhir Bagian Lainnya ---
 
 // 404 Handler (dari template)
 app.use((req, res) => {
